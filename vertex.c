@@ -1,4 +1,4 @@
- #include "vertex.h"
+#include "vertex.h"
 #include <string.h>
 #include <stdio.h>
 
@@ -75,7 +75,7 @@ Vertex * vertex_init (){
   }
     
   new_vertex->id = 0;
-  *new_vertex->tag = "\0";
+  new_vertex->tag[0] = '\0';
   new_vertex->state = WHITE;
 
   return new_vertex;  
@@ -236,10 +236,10 @@ int vertex_cmp (const void * v1, const void * v2){
 
   if(vertex_getId((const Vertex *)v1) < vertex_getId((const Vertex *)v2))
     return -1;
-  if(vertex_getId((const Vertex *)v1) > vertex_getId((const Vertex *)v2))
+  else if(vertex_getId((const Vertex *)v1) > vertex_getId((const Vertex *)v2))
     return 1;
 
-  if(vertex_getId(v1) == vertex_getId(v2))
+  else
     return strcmp(vertex_getTag(v1), vertex_getTag(v2)); ////// NPIDCHEF
  
 };
@@ -275,8 +275,10 @@ void * vertex_copy (const void * src){
     return NULL;
 
   trg->id = ((Vertex*)src)->id;
-  strcpy(trg->tag, ((Vertex*)src)->tag;
+  strcpy(trg->tag, ((Vertex*)src)->tag);
   trg->state = ((Vertex*)src)->state;
+
+  return trg;
 };
 
 
